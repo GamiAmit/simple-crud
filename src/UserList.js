@@ -137,13 +137,6 @@ function UserList() {
                     ))}
                   </tbody>
                 </table>
-                {/* {itemToDelete !== null && (
-                  <div className="confirmation-dialog">
-                    <p>Are you sure you want to delete this item?</p>
-                    <button onClick={handleConfirmDelete}>Yes</button>
-                    <button onClick={handleCancelDelete}>Cancel</button>
-                  </div>
-                )} */}
               </div>
             )}
 
