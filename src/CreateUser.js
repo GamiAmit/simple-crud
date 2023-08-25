@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -74,8 +74,8 @@ const CreateUser = () => {
           navigate("/");
         })
 
-        .catch(() =>
-          toast.error("url is wrong!", {
+        .catch((err) =>
+          toast.error(err.message, {
             position: toast.POSITION.TOP_RIGHT,
           })
         );
@@ -93,7 +93,6 @@ const CreateUser = () => {
             type="text"
             className="form-control"
             name="title"
-            // onChange={(e) => setNewUser({ ...newUser, title: e.target.value })}
             onChange={handleChange}
           />
           {formErrors.title && (
@@ -106,9 +105,6 @@ const CreateUser = () => {
             type="text"
             className="form-control"
             name="firstName"
-            // onChange={(e) =>
-            //   setNewUser({ ...newUser, firstName: e.target.value })
-            // }
             onChange={handleChange}
           />
           {formErrors.firstName && (
@@ -122,9 +118,6 @@ const CreateUser = () => {
             type="text"
             className="form-control"
             name="lastName"
-            // onChange={(e) =>
-            //   setNewUser({ ...newUser, lastName: e.target.value })
-            // }
             onChange={handleChange}
           />
           {formErrors.lastName && (
@@ -138,7 +131,6 @@ const CreateUser = () => {
             type="email"
             className="form-control"
             name="email"
-            // onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
             onChange={handleChange}
           />
           {formErrors.email && (
@@ -150,7 +142,7 @@ const CreateUser = () => {
           Add User
         </button>
 
-        <Link to="/">
+        <Link to="/userList">
           <button type="submit" className="btn btn-primary ms-3">
             cancle
           </button>

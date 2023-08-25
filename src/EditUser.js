@@ -132,7 +132,7 @@ const EditUser = () => {
           <button type="submit" className="btn btn-primary">
             save
           </button>
-          <Link to="/">
+          <Link to="/userList">
             <button type="submit" className="btn btn-primary ms-3">
               cancle
             </button>

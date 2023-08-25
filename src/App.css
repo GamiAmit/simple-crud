@@ -60,3 +60,14 @@
   font-size: 11px;
   /* margin: 0px 0 0px 0; */
 }
+
+.password {
+  position: relative;
+}
+.showhide {
+  position: absolute;
+  /* bottom: 50px; */
+  top: 42px;
+  right: 10px;
+  cursor: pointer;
+}

@@ -1,11 +1,9 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
-import axios from "axios";
+import axios from "./axiosInstance";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
-
-// import { Link } from "react-router-dom";
 
 function UserList() {
   const navigate = useNavigate();
@@ -14,50 +12,68 @@ function UserList() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 20;
-
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const headers = {
-          "app-id": process.env.REACT_APP_SECRET_KEY,
-        };
-        setIsLoading(true);
-        const { data } = await axios.get(
-          `https://dummyapi.io/data/v1/user?page=${currentPage}&limit=${limit}`,
-          {
-            headers: headers,
-          }
-        );
-        setUsers(data.data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.error("Error fetching data:", error);
-      }
+    if (!localStorage.getItem("token")) {
+      navigate("/");
     }
-
+  }, [navigate]);
+  const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+  const fetchData = async () => {
+    try {
+      // const headers = {
+      //   "app-id": process.env.REACT_APP_SECRET_KEY,
+      // };
+      setIsLoading(true);
+      const { data } = await axios.get(
+        `user?page=${currentPage}&limit=${limit}`
+        // {
+        //   headers: headers,
+        // }
+      );
+      setUsers(data.data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, []);
 
   const handleDelete = (userId) => {
     if (window.confirm("are you sure you want to delete this user ")) {
-      axios
-        .delete(`https://dummyapi.io/data/v1/user/${userId}`, {
-          headers: {
-            "app-id": process.env.REACT_APP_SECRET_KEY,
-          },
-        })
+      axios({
+        method: "delete",
+        url: `user/${userId}`,
+      })
+        // .delete(`https://dummyapi.io/data/v1/user/${userId}`, {
+        //   headers: {
+        //     "app-id": process.env.REACT_APP_SECRET_KEY,
+        //   },
+        // })
         .then(() => {
-          navigate("/");
+          navigate("/userList");
+          fetchData();
         })
         .catch((err) => console.log(err));
     }
   };
-
+  useEffect(() => {
+    document.title = "User List";
+  });
   return (
     <div className="conainer mt-5">
       <div className="d-flex justify-content-center align-items-center h-screen bg-gray-100">
         <div className="w-50 p-6 bg-white rounded shadow">
+          <div className="d-flex justify-content-end pe-4 pt-3">
+            <button className="btn btn-secondary " onClick={logOut}>
+              log out
+            </button>
+          </div>
+
           <h1 className="mb-4 text-center text-2xl font-semibold">User List</h1>
 
           <div className="grid p-4 justify-center">
