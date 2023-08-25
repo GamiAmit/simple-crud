@@ -68,19 +68,16 @@ function UserList() {
     <div className="conainer mt-5">
       <div className="d-flex justify-content-center align-items-center h-screen bg-gray-100">
         <div className="w-50 p-6 bg-white rounded shadow">
-          <div className="d-flex justify-content-end pe-4 pt-3">
-            <button className="btn btn-secondary " onClick={logOut}>
-              log out
-            </button>
-          </div>
-
           <h1 className="mb-4 text-center text-2xl font-semibold">User List</h1>
 
           <div className="grid p-4 justify-center">
-            <div className="d-flex justify-content-end mb-3">
+            <div className="d-flex justify-content-between mb-3">
               <Link to="/create">
-                <button className="btn btn-primary btn-lg  ">Add User</button>
+                <button className="btn btn-primary btn-lg  ">Add +</button>
               </Link>
+              <button className="btn btn-danger " onClick={logOut}>
+                log out
+              </button>
             </div>
             {isLoading ? (
               <p className="text-center">Loading...</p>
