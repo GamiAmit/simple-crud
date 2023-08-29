@@ -12,26 +12,16 @@ function UserList() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 20;
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/");
-    }
-  }, [navigate]);
+
   const logOut = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
   const fetchData = async () => {
     try {
-      // const headers = {
-      //   "app-id": process.env.REACT_APP_SECRET_KEY,
-      // };
       setIsLoading(true);
       const { data } = await axios.get(
         `user?page=${currentPage}&limit=${limit}`
-        // {
-        //   headers: headers,
-        // }
       );
       setUsers(data.data);
       setIsLoading(false);
@@ -49,11 +39,6 @@ function UserList() {
         method: "delete",
         url: `user/${userId}`,
       })
-        // .delete(`https://dummyapi.io/data/v1/user/${userId}`, {
-        //   headers: {
-        //     "app-id": process.env.REACT_APP_SECRET_KEY,
-        //   },
-        // })
         .then(() => {
           navigate("/userList");
           fetchData();

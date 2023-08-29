@@ -1,6 +1,10 @@
 #image {
   width: 90px;
 }
+.Auth-form-content {
+  display: flex;
+  flex-direction: column;
+}
 .add-user-btn {
   padding: 8px 16px;
   background-color: #007bff;
@@ -71,3 +75,13 @@
   right: 10px;
   cursor: pointer;
 }
+/* .google {
+  position: relative;
+} */
+/* .auth {
+  /* position: absolute; */
+/* top: 600px; */
+/* left: 45%;
+  display: flex;
+  justify-content: center; */
+/* } */

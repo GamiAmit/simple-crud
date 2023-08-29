@@ -7,6 +7,9 @@ import { ToastContainer } from "react-toastify";
 import CreateEdit from "./CreateEdit";
 import Signin from "./Signin";
 import SignUp from "./SignUp1";
+import PrivetRoute from "./PrivetRoute";
+import User from "./User";
+import NotFound from "./NotFound";
 const App = () => {
   return (
     <>
@@ -21,6 +24,7 @@ const App = () => {
             path="/edit-user/:userId"
             element={<CreateEdit isUpdate={true} />}
           />
+          <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
         </Routes>
       </Router>
       <ToastContainer />
